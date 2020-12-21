@@ -53,7 +53,8 @@
 
 										<h5>Single Responsibility Principle (SRP)</h5>
 										<ul>
-											<li><code>Every class should only have one responsibility and therefore only one reason to change.</code></li>
+											<li><code>Every class should only have one responsibility</code><br>
+													<code>and therefore only one reason to change.</code></li>
 											<li>In other words, a class is responsible for performin only one speciied task.</li>
 											<li>Too many tasks within a class would cause to much complexity and change of one task can affect another task's work.</li>
 											<li>When multiple tasks in a class and there is a new requirement from the business, it forces us to modify existing code which violates rest of SOLID principles.</li>
@@ -62,14 +63,27 @@
 											<li>SRP enables flexibility in extending the application with new business requirements.</li>
 										</ul>
 
-										<h5>Open Closed Principle</h5>
+										<h5>Open Closed Principle (OCP)</h5>
 										<ul>
-											<li><code>Software Entities (classes, functions, modules) should be open for extension but closed to change.</code></li>
+											<li><code>Software Entities (classes, functions, modules)</code><br>
+													<code>should be open for extension but closed to change.</code></li>
+											<li>Without OCP, when a new business requirement comes in, the most common approach is modifing the definition of existing method.</li>
+											<li>Keeping modifying definition of extisting functunality we end up testing the enire scope repeatedly.</li>
+											<li>When following OCP, instead of modifying, we should extend the aplication to satisfy the new requirement.</li>
+											<li>Avoiding modifying, we are less likely to introduce some bugs into the existing code as well as we avoinding redeploying the same code again and again.</li>
+											<li>Extension can be achieved by inheritance from parent class where child class satisfies a new requirement.
+												<br>
+												- child class extends existing parent classes,<br>
+												- child class can override definition of parent's methods which covers a new requirements.
+											</li>
+											<li>We can be keeping an abstract class - the most general one that will never be instantiated but will be a pattern to inherit from by sub-classes where each sub-class answers specific business requirement.</li>
 										</ul>
 
 										<h5>Liskov's Substitution Principle</h5>
 										<ul>
-											<li><code>If S is a subtype of T, then objects of type T may be replaced with objects of Type S.</code></li>
+											<li><code>If S is a subtype of T, then objects of type T</code><br>
+													<code>may be replaced with objects of Type S.</code></li>
+											<li></li>
 										</ul>
 
 										<h5>Interface Segregation Principle</h5>
