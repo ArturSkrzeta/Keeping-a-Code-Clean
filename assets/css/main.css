@@ -217,16 +217,19 @@ img {
 
 	pre {
 		font-family: "Source Code Pro", monospace;
-		font-size: 0.9em;
-		margin: 0 0 2.25em 0;
+		font-size: 0.8em;
+		color: white;
+		margin: 1em 0 0.5em 0;
+		padding: 0.5em 0 0.5em 1em;
+		background: #555;
+		border-radius: 5px;
 	}
 
 		pre code {
 			-webkit-overflow-scrolling: touch;
-			display: block;
-			line-height: 1.5em;
-			overflow-x: auto;
-			padding: 1em 1.5em;
+			display: inline-block;
+			border-radius: 0;
+			line-height: 0.5em;
 		}
 
 	.align-left {
