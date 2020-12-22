@@ -137,13 +137,13 @@ class Truck(<span style="color:#00ffea">Vehicle</span>):
   def count_wheels(self):
     pass
 
-def vehicle_wheels_count(vehicles):
-  for viehicle in vehicles:
+def vehicle_wheels_count(<span style="color:#ffe200">vehicles</span>):
+  for viehicle in <span style="color:#ffe200">vehicles</span>:
     print(viehicle.count_wheels())
 
 def main():
-	vehicles = [Car(), Car(), Truck()]
-	vehicle_wheels_count(vehicles)</pre>
+	<span style="color:#ffe200">vehicles</span> = [Car(), Car(), Truck()]
+	vehicle_wheels_count(<span style="color:#ffe200">vehicles</span>)</pre>
 <!-- code area stop -->
 													- <b>Vehicle</b> class defines count_wheels method,<br>
 													- every child class that inherits from Vehicle parent class implements <b>count_wheels</b> method,<br>
@@ -155,8 +155,26 @@ def main():
 
 										<h5>Interface Segregation Principle (ISP):</h5>
 										<ul>
-											<li><code>.</code></li>
+											<li><code>Clients should not be forced to depend upon interfaces that they do not use</code></li>
+											<li>Interface is a class-like structure that lists what methods needs to be implemented by a class that makes usage of this interface.
+													Like I said, it only indicates the methods, interface doesn't define their implementation - this is job for the class. </li>
+											<li>In Python, there is no interface as such. However, Python allows to implement abstract class with usage of abc module.
+												- we cannot instantiate an abstract class,<br>
+												- abstract class defines methods that needs to be implemented in all of the child classes that inherits from it,<br>
+												- with using abract classes we can be creating Python's interface-like structures.
+											</li>
+											<li>Lets set up scenario where there is a big interace that has multiple abstract methods:
+												- class that uses that interface needs to implement all of the abstract methods (in Python, it is required by decorator @abstractmethod),<br>
+												- however, there may be some abstract methods that our specific class doesn't need to implement,<br>
+												- implementing needless method or implementing it as <code>pass</code> violates SOLID principles,<br>
+												- following ISP, we would need to divide one main interface to several ones due to their functionality so that classes tha would use them can implement only methods that they need.
+											</li>
 										</ul>
+
+										<!-- <h5></h5>
+										<ul>
+											<li></li>
+										</ul> -->
 
 									</header>
 								</div>
