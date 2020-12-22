@@ -55,16 +55,17 @@
 										<ul>
 											<li><b>Abstract class</b> is a class that contains one or more abstract methods. They cannot be instantiated and they require subclasses to provide implementations for their abstract methods.</li>
 											<li><b>Abstract method</b> is a method that is declared, but contains no implementation. Needs to be implemented by subclasses that inherits them.</li>
+
 <!-- code area start -->
 <pre>from abc import ABC, abstractmethod
 
-class Save(ABC):
+class <span style="color:#00ffea">Save</span>(ABC):
 
   @abstractmethod
   def save_data(self):
     print("Saving data...")
 
-class SaveToDb(Save):
+class SaveToDb(<span style="color:#00ffea">Save</span>):
 
   def save_data(self):
     super().do_something()
@@ -74,16 +75,25 @@ x = SaveToDb()
 x.save_data()
 
 -------------------------
-output: Saving data...
-	to database.</pre>
+# output:
+# Saving data...
+# to database.</pre>
 <!-- code area stop -->
+
+												- <b>Save</b> abstract class defines abstract method <b>save_data</b>,<br>
+												- <b>SaveToDb</b> class implements <b>save_data</b> method and extends it with additional functionality.
+											<li><b>Inheritance</b> - child class inherits all of the attributes and methods of parent class.
+													However, everything that is inherited by child class can be extended in order to fit requirements that child class has to fulfil.
+													In such case there in a need to re-implement the method in the child class which is called the <b>method overriding</b>.
+												 	In the above code section, the child class SaveToDb inherits from the parent class Save.</li>
+											<li><b>Polymorphism</b> - naming methods the same in child class means that the same function can be used by different types/classes that inheritns from a base class .</li>
 										</ul>
 
 										<h5>Single Responsibility Principle (SRP):</h5>
 										<ul>
 											<li><code>Every class should only have one responsibility</code><br>
 													<code>and therefore only one reason to change.</code></li>
-											<li>In other words, a class is responsible for performing only one speciied task.</li>
+											<li>In other words, a class is responsible for performing only one specified task.</li>
 											<li>Too many tasks within a class would cause to much complexity and change of one task can affect another task's work.</li>
 											<li>When multiple tasks in a class and there is a new requirement from the business, it forces us to modify existing code which violates rest of SOLID principles.</li>
 											<li>With this SRP, maintaining the code is much easier and readable when handing code over.</li>
@@ -111,13 +121,29 @@ output: Saving data...
 										<ul>
 											<li><code>If S is a subtype of T, then objects of type T</code><br>
 													<code>may be replaced with objects of Type S.</code></li>
-											<li>This principle is strictly related to inheritnace where any child class can replace its parent class without breaking functionality.</li>
-											<li>We can define methods in the child class with the same name as defined in their parent class - this is what is called <b>polymorphism</b>.</li>
-											<li>Naming methods the same means that the same function can be used by different types/classes that inheritns from a base class.</li>
-											<li>Naming methods the same means inheitance of the method by a child class.
-												However, there are situations where ingereted method doesn't fit into applicaton or nature of child class.
-												In such case there in a need to re-implement the method in the child class which is called the <b>method overriding</b>.</li>
-											<li>...</li>
+											<li>This principle is strictly related to proper inheritnace where any child class can replace its parent class without breaking functionality.</li>
+<!-- code area start -->
+<pre>
+class <span style="color:#00ffea">Vehicle</span>:
+  def count_wheels(self):
+    pass
+
+class Car(<span style="color:#00ffea">Vehicle</span>):
+  def count_wheels(self):
+    pass
+
+class Truck(<span style="color:#00ffea">Vehicle</span>):
+  def count_wheels(self):
+    pass
+
+def vehicle_wheels_count(vehicles):
+  for viehicle in vehicles:
+    print(viehicle.count_wheels())
+
+def main():
+	vehicles = [Car(), Car(), Truck()]
+	vehicle_wheels_count(vehicles)</pre>
+<!-- code area stop -->
 										</ul>
 
 										<h5>Interface Segregation Principle (ISP):</h5>
