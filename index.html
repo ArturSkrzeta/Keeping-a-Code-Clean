@@ -183,11 +183,11 @@ def main():
 											<li>There are some characteristic terms for a bad code design:
 												<br>
 												- <b>Rigidity</b> when it's hard to do some changes to the code as they affect to many parts of the application. When change necessary, it forces us to modify another dependent part of the code. Furthermore, it causes hardships with time and costs estimation for changes implementation,<br>
-												- <b>Fragility</b> when changes being implemented causes crash of app's parts that we did not expect. It lowers trust in the project that uses the code because each another change can cause avalanche of error from unknown sides,<br>
-												- <b>Immobility</b> when it's impossible to use the code in another applicatin as it's very difficult to extract it. Difficulties result from too big dependecny of code section against other ones. It happens that finding dependecies and extracting the code for reusing is more time consuming than writing it from scratch.
+												- <b>Fragility</b> when changes being implemented causes crash of app's parts that we did not expect. It lowers trust in the project that uses the code because each another change can cause avalanche of errors from unknown sides,<br>
+												- <b>Immobility</b> when it's impossible to use the code in another application as it's very difficult to extract it. Difficulties result from too big dependecny of code section against other ones. It happens that finding dependecies and extracting the code for reusing is more time consuming than writing it from scratch.
 											</li>
-											<li>The abstraction shouldn't be overloaded with unnecessary details. It should be providing all key interfaces instead.</li>
-											<li>The main assumption over here is that an implementation should be changing more often than the abstraction it was created on.</li>
+											<li>Abstractions need to be organized is such way they don't depend on details (concrete implementations) but rather other way around - the details should depend on abstractions.</li>
+											<li>The main assumption over here is that an implementations changes more often than the abstraction they were created on.</li>
 											<li>Low-level modules are sub-modules of a high-level module which in turn can be the low-level module for another module.</li>
 										</ul>
 
