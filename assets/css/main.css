@@ -228,6 +228,7 @@ img {
 		pre code {
 			-webkit-overflow-scrolling: touch;
 			display: inline-block;
+			overflow-x: auto;
 			border-radius: 0;
 			line-height: 0.5em;
 		}
