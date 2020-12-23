@@ -263,7 +263,7 @@ def main():
 <pre>
 from abc import ABC, abstractmethod
 
-class <span style="color:#00ffea">State(ABC)</span>:
+class <span style="color:#00ffea">State(</span>ABC<span style="color:#00ffea">)</span>:
 
   @abstractmethod
   def handle(self):
@@ -282,20 +282,20 @@ class <span style="color:#e48eff">Context</span>:
   def request(self):
     self._state.handle()
 
-class <span style="color:#ffe200">StateA</span>(<span style="color:#00ffea">State</span>):
+class <span style="color:#ffe200">StateA(</span><span style="color:#00ffea">State</span><span style="color:#ffe200">)</span>:
 
   def handle(self):
     print("<span style="color:#ffe200">StateA</span> handles request and wants to change the state of the context.")
     self.context.transition_to(<span style="color:#00ff45">StateB()</span>)
 
-class <span style="color:#00ff45">StateB</span>(<span style="color:#00ffea">State</span>):
+class <span style="color:#00ff45">StateB(</span><span style="color:#00ffea">State</span><span style="color:#00ff45">)</span>:
 
   def handle(self):
     print("<span style="color:#00ff45">StateB</span> handles request and wants to change the state of the context.")
     self.context.transition_to(<span style="color:#ffe200">StateA()</span>)
 
 def main():
-  context = <span style="color:#e48eff">Context</span>(<span style="color:#ffe200">StateA()</span>)
+  context = <span style="color:#e48eff">Context(</span><span style="color:#ffe200">StateA()</span><span style="color:#e48eff">)</span>
   context.request()
   context.request()
 
