@@ -263,17 +263,13 @@ def main():
 <pre>
 from abc import ABC, abstractmethod
 
-class State(ABC):
+class <span style="color:#00ffea">State(ABC)</span>:
 
   @abstractmethod
-  def handle1(self):
+  def handle(self):
     pass
 
-  @abstractmethod
-  def handle2(self):
-    pass
-
-class Context:
+class <span style="color:#e48eff">Context</span>:
 
   def __init__(self, state):
     self.transition_to(state)
@@ -283,34 +279,25 @@ class Context:
     self._state = state                 # current state
     self._state.context = self          # current context that got a specifc state
 
-  def request1(self):
-    self._state.handle1()
+  def request(self):
+    self._state.handle()
 
-  def request2(self):
-    self._state.handle2()
+class <span style="color:#ffe200">StateA</span>(<span style="color:#00ffea">State</span>):
 
-class StateA(State):
+  def handle(self):
+    print("<span style="color:#ffe200">StateA</span> handles request and wants to change the state of the context.")
+    self.context.transition_to(<span style="color:#00ff45">StateB()</span>)
 
-  def handle1(self):
-    print("StateA handles request1 wants to change the state of the context.")
-    self.context.transition_to(StateB())
+class <span style="color:#00ff45">StateB</span>(<span style="color:#00ffea">State</span>):
 
-  def handle2(self):
-    print("StateA handles request2.")
-
-class StateB(State):
-
-  def handle1(self):
-    print("StateB handles request1.")
-
-  def handle2(self):
-    print("StateB handles request2 and wants to change the state of the context.")
-    self.context.transition_to(StateA())
+  def handle(self):
+    print("<span style="color:#00ff45">StateB</span> handles request and wants to change the state of the context.")
+    self.context.transition_to(<span style="color:#ffe200">StateA()</span>)
 
 def main():
-  context = Context(StateA())
-  context.request1()
-  context.request2()
+  context = <span style="color:#e48eff">Context</span>(<span style="color:#ffe200">StateA()</span>)
+  context.request()
+  context.request()
 
 if __name__ == "__main__":
   # The client code.
