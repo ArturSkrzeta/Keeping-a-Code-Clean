@@ -46,7 +46,7 @@
 							<section id="one">
 								<div class="container">
 									<header class="major">
-										<h2>Keeping a Python Code Clean</h2>
+										<h2>Keeping Python Code Clean</h2>
 										<h3>Intro</h3>
 
 										<h3>SOLID</h3>
@@ -57,7 +57,8 @@
 											<li><b>Abstract method</b> is a method that is declared, but contains no implementation. Needs to be implemented by subclasses that inherits them.
 
 <!-- code area start -->
-<pre>from abc import ABC, abstractmethod
+<pre>
+from abc import ABC, abstractmethod
 
 class <span style="color:#00ffea">Save</span>(ABC):
 
@@ -207,10 +208,13 @@ def main():
 											<li>The best thin about them is that they provide common language to communicate design ideas wihing developers effectively.</li>
 										</ul>
 
+										<p><b>Creational Desing Patterns</b></p>
+
 										<h5>Factory:</h5>
 										<ul>
 											<li>Everythin in Python is an object and can be treated equally no metther if it is a class, a function or custom objects attached to variable. They can be simply created, passed as parameter or assigned.</li>
 											<li>Due to this fact factory pattern is not really needed. We can simply creat function that accepts a class as a parameter to create a set of objets:
+<!-- code area start -->
 <pre>
 class <span style="color:#00ffea">ExampleClass</span>:
   def __init__(self, x, y):
@@ -238,6 +242,8 @@ def main():
  												there will be always one object that variables <code>s1</code> and <code>s2</code> points to.</li>
 										</ul>
 
+										<p><b>Behavioral Desing Patterns</b></p>
+
 										<h5>State:</h5>
 										<ul>
 											<li>It is a behavioral pattern that allows object to alter ist behaviour when its internal state changes.</li>
@@ -251,6 +257,67 @@ def main():
 									</li>
 											<li>The solution that state pattern provides is to create new classes for all possible states the object can take and input all state-specific behavior into these classes.</li>
 											<li>The main obejct, whose state we observe, stores reference to one of the state objet representing its current state and delegates state-related behaviour to that object.</li>
+											<li>In the State pattern, the particular states are aware of each other and on state can initiate transition to another.</li>
+											<li>Code example:
+<!-- code area start -->
+<pre>
+from abc import ABC, abstractmethod
+
+class State(ABC):
+
+  @abstractmethod
+  def handle1(self):
+    pass
+
+  @abstractmethod
+  def handle2(self):
+    pass
+
+class Context:
+
+  def __init__(self, state):
+    self.transition_to(state)
+
+  def transition_to(self, state):
+    print(f"Context: Transition to {type(state).__name__}")
+    self._state = state                 # current state
+    self._state.context = self          # current context that got a specifc state
+
+  def request1(self):
+    self._state.handle1()
+
+  def request2(self):
+    self._state.handle2()
+
+class StateA(State):
+
+  def handle1(self):
+    print("StateA handles request1 wants to change the state of the context.")
+    self.context.transition_to(StateB())
+
+  def handle2(self):
+    print("StateA handles request2.")
+
+class StateB(State):
+
+  def handle1(self):
+    print("StateB handles request1.")
+
+  def handle2(self):
+    print("StateB handles request2 and wants to change the state of the context.")
+    self.context.transition_to(StateA())
+
+def main():
+  context = Context(StateA())
+  context.request1()
+  context.request2()
+
+if __name__ == "__main__":
+  # The client code.
+  main()
+</pre>
+<!-- code area stop -->
+											</li>
 										</ul>
 
 									</header>
