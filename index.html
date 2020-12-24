@@ -46,17 +46,10 @@
 							<section id="one">
 								<div class="container">
 									<header class="major">
-										<h2>Design Patterns in Python</h2>
+										<h2>Keeping Python Code Clean</h2>
 										<h3>Intro</h3>
-
-										<ul>
-											<li>Becasue of Python's dynamic nature, there are some differences in the implementation with comaprison to other static typed laguages for which design patterns were originally made up.</li>
-											<li>Design patterns apply to object-oriented software design that appears in different scenarios where we model logic or problem that we try to solve.</li>
-											<li>In other words, design patterns are abstract ideas on objects layout, how they interact with each other in a particular scenario.</li>
-											<li>Once again, due to Pythonic nautre, some of desing patterns can't find their implementation but some of them are already embedded in Python itself.</li>
-											<li>The best thing about them is that they provide a common language to efficiently communicate design ideas among developers.</li>
-										</ul>
-
+										<p>In this section, I try my best to collect and describe and first of all put down my understanding on how to implement all the techniques that contribute to the clean code of an application.
+											I touch here both theoretical principles and python libraries that assists with feedback on Python's syntax.</p>
 									</header>
 								</div>
 							</section>
@@ -67,7 +60,9 @@
 									<h3>Features</h3>
 									<p>App includes following features:</p>
 									<ul class="feature-icons">
-										<li class="icon solid fa-check">Design Patterns</li>
+										<li class="icon solid fa-check">SOLID</li>
+										<li class="icon solid fa-check">DRY</li>
+										<li class="icon solid fa-check">KIS</li>
 									</ul>
 								</div>
 							</section>
@@ -77,302 +72,156 @@
 								<div class="container">
 									<h3>Demo</h3>
 
-									<h5>We can encapsulate design patterns with 3 groups:</h5>
+									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>SOLID</b></p>
+
+									<h5>Terminology:</h5>
 									<ul>
-										<li>Creational Desing Patterns</li>
-										<li>Behavioral Desing Patterns</li>
-										<li>Structural Desing Patterns</li>
-									</ul>
+										<li><b>Abstract class</b> is a class that contains one or more abstract methods. They cannot be instantiated and they require subclasses to provide implementations for their abstract methods.</li>
+										<li><b>Abstract method</b> is a method that is declared, but contains no implementation. Needs to be implemented by subclasses that inherits them.
 
-									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>Creational Desing Patterns</b></p>
-
-									<h5>Factory:</h5>
-									<ul>
-										<li>Everything in Python is an object and can be treated equally no metther if it's a class, a function or a custom object attached to variable. They can be simply created, passed as parameter or assigned.</li>
-										<li>Due to this fact factory pattern is not really needed. We can simply create function that accepts a class as a parameter to create a set of objets.</li>
-										<li>Code example:
-<!-- code area start -->
-<pre>
-class <span style="color:#00ffea">ExampleClass</span>:
-def __init__(self, x, y):
-	self.x = x
-	self.y = y
-
-def main():
-list_of_objects = [<span style="color:#00ffea">ExampleClass(x, x*2)</span> for x in range(10)]
-print(list_of_objects[2].y)
-
---------------
-# output:
-# 4
-</pre>
-<!-- code area stop -->
-										</li>
-									</ul>
-
-									<h5>Singleton:</h5>
-									<ul>
-										<li>It is a type of creational pattern that restrics to have only one object of a particular type.</li>
-										<li>No matter how many instantiation I want to make:
-											<br>
-											<code>s1 = Singleton()</code><br>
-											<code>s2 = Singleton()</code><br>
-											there will be always one object that variables <code>s1</code> and <code>s2</code> points to.</li>
-									</ul>
-
-									<h5>Builder:</h5>
-									<ul>
-										<li>Without builder pattern:
-											<br>
-											- Typical apporach would be creating base class and then creating a set of subclasses that extend the base class.
-											Each subclass would bring some extenstions to fulfil its own specialized requirement.<br>
-											- The danger of this approch is ending up with a big amount of subclasses and each additional requirement that comes in grows that hierarchy even more.
-										</li>
-										<li>With Builder pattern:
-											<br>
-											<code>Builder makes creating complex objects from a baisc object much easier</code><br>
-											- It's very useful when we have a basic model and based on that model we want to create multiple modified models.<br>
-											- For example a plain house is a basic model, however a house with swimming pool and 3 floors is a modification of the basic model of house.
-										</li>
-										<li>Builder organizes the code into series of steps that are executed one by one when building an object.
-												Importantly, we do not have to call all of the steps.
-												We have to call only these steps that are necessary for a specific model of house from example above.
-												We can call each step in the sequence we want on our own or we can use a special class called <b>director</b> which has a specific step sequence prepared up front.
-										</li>
-										<li>Code example:
-<!-- code area start -->
-<pre>
-from abc import ABC
-
-class <span style="color:#00ffea">Builder(</span>ABC<span style="color:#00ffea">)</span>:
-
-@abstractproperty
-	def product(self) -> None:
-		pass
-
-@abstractmethod
-	def produce_part_a(self) -> None:
-		pass
-
-@abstractmethod
-	def produce_part_b(self) -> None:
-		pass
-
-@abstractmethod
-	def produce_part_c(self) -> None:
-		pass
-
-class <span style="color:#e48eff">ConcreteBuilder1(</span><span style="color:#00ffea">Builder</span><span style="color:#e48eff">)</span>:
-
-def __init__(self) -> None:
-	self.reset()
-
-def reset(self) -> None:
-	self._product = <span style="color:#00ff45">Product1()</span>
-
-@property
-def product(self) -> <span style="color:#00ff45">Product1</span>:
-	product = self._product
-	self.reset()
-	return product
-
-def produce_part_a(self) -> None:
-	self._product.add("PartA1")
-
-def produce_part_b(self) -> None:
-	self._product.add("PartB1")
-
-def produce_part_c(self) -> None:
-	self._product.add("PartC1")
-</pre>
-<!-- code area stop -->
-											- Builder abstract class is the interface with abstract methods which are the building steps.<br>
-											- Actual builder class follows builder's interface and provides implementation for building steps:<br>
-											&nbsp&nbsp&nbsp&nbsp>&nbsp produce_part_a,<br>
-											&nbsp&nbsp&nbsp&nbsp>&nbsp produce_part_b,<br>
-											&nbsp&nbsp&nbsp&nbsp>&nbsp produce_part_c.<br>
-											- Each newly-created builder instance should be a blank object which will be extending with specific building steps as per needs.<br>
-<!-- code area start -->
-<pre>
-class <span style="color:#00ff45">Product1()</span>:
-
-def __init__(self) -> None:
-	self.parts = []
-
-def add(self, part) -> None:
-	self.parts.append(part)
-
-def list_parts(self) -> None:
-	print(f"Product parts: {', '.join(self.parts)}", end="")
-</pre>
-<!-- code area stop -->
-											- Final object of Product1 class can be a basic product (no additional parts) or very extended protduct (multiple parts).<br>
-											- How many parts an object inlcudes, it depends on how many and what building methods client, using the code, calls.<br>
-<!-- code area start -->
-<pre>
-def main():
-
-builder = <span style="color:#e48eff">ConcreteBuilder1()</span>
-builder.produce_part_a()
-builder.produce_part_b()
-builder.product.list_parts()
-
-if __name__ == "__main__":
-  main()
-
-------------------
-# output:
-# Product parts: PartA1, PartB1
-</pre>
-<!-- code area stop -->
-											- Methods (building steps) that are very specialized for that builder's objects should be declared in that builder instead of interface.
-												It's not so good practice to keep methods in the interface that wont be used by some sub-classes.<br>
-											- We can have multiple builders for building different kind of objects, as to our house example, houses can have different walls: wooden or concrete.<br>
-											- We can use director class that orchestrate building specific objects by ordered sequence of steps.
-										</li>
-									</ul>
-
-									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>Behavioral Desing Patterns</b></p>
-
-									<h5>State:</h5>
-									<ul>
-										<li>Without state pattern:
-											<br>
-											- The way withou state pattern is implementing a lot of if statements that select appropriate behaviour depending on the current object's state.<br>
-											- In that case a state is basically a set of values of the object's properties.<br>
-											- The biggest disadvantage of this solution is once we start adding more states and state-dependent bahaviours the code becomes diffictul to maintain.<br>
-											- This is because the whole logic may require changing state condtions in every method it applies.<br>
-											- And this is pretty certain that at the app's desing stage we may be not able to predict all the possible states and bahaviours. Hence, the problem gets bigger as project evolves.
-										</li>
-										<li>With state pattern:
-											<br>
-											<code>It allows object to alter ist behaviour when its internal state changes</code><br>
-											-	The main idea is that there is a set of finite number of predetermined states that the object can be in at any give moment. Depending on the current state, the object can be behaving differently.<br>
-											-	The solution that state pattern provides is to create new classes for all possible states the object can take and input all state-specific behavior into these classes.<br>
-											-	The main obejct, whose state we observe, stores reference to one of the state objet representing its current state and delegates state-related behaviour to that object.<br>
-											-	In the State pattern, the particular states are aware of each other and on states we can initiate transition to another one.
-										</li>
-										<li>Code example:
 <!-- code area start -->
 <pre>
 from abc import ABC, abstractmethod
 
-class <span style="color:#00ffea">State(</span>ABC<span style="color:#00ffea">)</span>:
+class <span style="color:#00ffea">Save</span>(ABC):
 
 @abstractmethod
-def handle(self):
-	pass
+def save_data(self):
+	print("Saving data...")
 
-class <span style="color:#e48eff">Context</span>:
+class SaveToDb(<span style="color:#00ffea">Save</span>):
 
-def __init__(self, state):
-	self.transition_to(state)
+def save_data(self):
+	super().do_something()
+	print("to database.")
 
-def transition_to(self, state):
-	print(f"Context: Transition to {type(state).__name__}")
-	self._state = state                 # current state
-	self._state.context = self          # current context that got a specifc state
+x = SaveToDb()
+x.save_data()
 
-def request(self):
-	self._state.handle()
-
-class <span style="color:#ffe200">StateA(</span><span style="color:#00ffea">State</span><span style="color:#ffe200">)</span>:
-
-def handle(self):
-	print("<span style="color:#ffe200">StateA</span> handles request and wants to change the state of the context.")
-	self.context.transition_to(<span style="color:#00ff45">StateB()</span>)
-
-class <span style="color:#00ff45">StateB(</span><span style="color:#00ffea">State</span><span style="color:#00ff45">)</span>:
-
-def handle(self):
-	print("<span style="color:#00ff45">StateB</span> handles request and wants to change the state of the context.")
-	self.context.transition_to(<span style="color:#ffe200">StateA()</span>)
-
-def main():
-context = <span style="color:#e48eff">Context(</span><span style="color:#ffe200">StateA()</span><span style="color:#e48eff">)</span>
-context.request()
-context.request()
-
-if __name__ == "__main__":
-# The client code.
-main()
-</pre>
+-------------------------
+# output:
+# Saving data...
+# to database.</pre>
 <!-- code area stop -->
+
+											- <b>Save</b> abstract class defines abstract method <b>save_data</b>,<br>
+											- <b>SaveToDb</b> class implements <b>save_data</b> method and extends it with additional functionality.
 										</li>
+										<li><b>Inheritance</b> - child class inherits all of the attributes and methods of parent class.
+												However, everything that is inherited by child class can be extended in order to fit requirements that child class has to fulfil.
+												In such case there in a need to re-implement the method in the child class which is called the <b>method overriding</b>.
+												In the above code section, the child class SaveToDb inherits from the parent class Save.</li>
+										<li><b>Polymorphism</b> - naming methods the same in child class means that the same function can be used by different types/classes that inheritns from a base class .</li>
 									</ul>
 
-									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;">Structural Design Patterns</p>
-
-									<h5>Facade:</h5>
+									<h5>Single Responsibility Principle (SRP):</h5>
 									<ul>
-										<li>Facade pattern provides a single interface to more complex classes, systems, libraries or frameworks.</li>
-										<li>The Facade delegates the client requests to the objects within the subsystem.</li>
+										<li><code>Every class should only have one responsibility</code><br>
+												<code>and therefore only one reason to change.</code></li>
+										<li>In other words, a class is responsible for performing only one specified task.</li>
+										<li>Too many tasks within a class would cause to much complexity and change of one task can affect another task's work.</li>
+										<li>When multiple tasks in a class and there is a new requirement from the business, it forces us to modify existing code which violates rest of SOLID principles.</li>
+										<li>With this SRP, maintaining the code is much easier and readable when handing code over.</li>
+										<li>When class perfoms only one task, it is much easiser to test it out.</li>
+										<li>SRP enables flexibility in extending the application with new business requirements.</li>
+									</ul>
 
+									<h5>Open Closed Principle (OCP):</h5>
+									<ul>
+										<li><code>Software Entities (classes, functions, modules)</code><br>
+												<code>should be open for extension but closed to change.</code></li>
+										<li>Without OCP, when a new business requirement comes in, the most common approach is modifing the definition of existing method.</li>
+										<li>Keeping modifying definition of extisting functunality we end up testing the enire scope repeatedly.</li>
+										<li>When following OCP, instead of modifying, we should extend the aplication to satisfy the new requirement.</li>
+										<li>Avoiding modifying, we are less likely to introduce some bugs into the existing code as well as we avoinding redeploying the same code again and again.</li>
+										<li>Extension can be achieved by inheritance from parent class where child class satisfies a new requirement.
+											<br>
+											- child class extends existing parent classes,<br>
+											- child class can override definition of parent's methods which covers a new requirements.
+										</li>
+										<li>We can be keeping an abstract class - the most general one that will never be instantiated but will be a pattern to inherit from by sub-classes where each sub-class answers specific business requirement.</li>
+									</ul>
 
-										<li>Code example:
+									<h5>Liskov's Substitution Principle (LSP):</h5>
+									<ul>
+										<li><code>If S is a subtype of T, then objects of type T</code><br>
+												<code>may be replaced with objects of Type S.</code></li>
+										<li>This principle is strictly related to proper inheritnace where any child class can replace its parent class without breaking functionality.
 <!-- code area start -->
 <pre>
-class <span style="color:#00ffea">Facade</span>:
+class <span style="color:#00ffea">Vehicle</span>:
+def count_wheels(self):
+	pass
 
-  def __init__(self, subsystem1: Subsystem1, subsystem2: Subsystem2) -> None:
-    self._subsystem1 = subsystem1  				# or Subsystem1()
-    self._subsystem2 = subsystem2  				# or Subsystem2()
+class Car(<span style="color:#00ffea">Vehicle</span>):
+def count_wheels(self):
+	pass
 
-  def operation(self) -> str:
+class Truck(<span style="color:#00ffea">Vehicle</span>):
+def count_wheels(self):
+	pass
 
-    results = []
-    results.append("Facade initializes subsystems:")
-    results.append(self._subsystem1.operation1())
-    results.append(self._subsystem2.operation1())
-
-    results.append("Facade orders subsystems to perform the action:")
-    results.append(self._subsystem1.operation_n())
-    results.append(self._subsystem2.operation_z())
-
-    return "\n".join(results)
-
-class <span style="color:#e48eff">Subsystem1</span>:
-
-  def operation1(self) -> str:
-    return "Subsystem1: Ready!"
-
-  def operation_n(self) -> str:
-    return "Subsystem1: Go!"
-
-class <span style="color:#ffe200">Subsystem2</span>:
-
-  def operation1(self) -> str:
-    return "Subsystem2: Ready!"
-
-  def operation1(self) -> str:
-    return "Subsystem2: Go!"
+def vehicle_wheels_count(<span style="color:#ffe200">vehicles</span>):
+for viehicle in <span style="color:#ffe200">vehicles</span>:
+	print(viehicle.count_wheels())
 
 def main():
-
-  subsystem1 = <span style="color:#e48eff">Subsystem1()</span>
-  subsystem2 = <span style="color:#ffe200">Subsystem2()</span>
-  facade = <span style="color:#00ffea">Facade(</span>subsystem1, subsystem2<span style="color:#00ffea">)</span>
-  facade.operation()
-
-if __name__ == "__main__":
-  main()
-
-------------------
-# output:
-# Facade initializes subsystems:
-# Subsystem1: Ready!
-# Subsystem2: Ready!
-# Facade orders subsystems to perform the action:
-# Subsystem1: Go!
-# Subsystem2: Go!
-</pre>
+<span style="color:#ffe200">vehicles</span> = [Car(), Car(), Truck()]
+vehicle_wheels_count(<span style="color:#ffe200">vehicles</span>)</pre>
 <!-- code area stop -->
-											- The Subsystem can accept requests either from the facade or client directly.<br>
-											- The Facade is yet another client, and it's not a part of the Subsystem.<br>
-											- Client in main function passes objects: subsystem1 and subsysem2 into facade.<br>
-											- Facade as middleman includes all methods that can be pefromed on both subsystems - they are groupped in facade's operation method.
+												- <b>Vehicle</b> class defines count_wheels method,<br>
+												- every child class that inherits from Vehicle parent class implements <b>count_wheels</b> method,<br>
+												- count_wheels method can be extended due to subclass's specification as car's wheels will be counted differently than truck's wheels,<br>
+												- the method <b>vehicle_wheels_count</b> doesn't care about type of passed object, it just calls count_wheels method on every object of the passed list,<br>
+												- all the method vehicle_wheels_count knows is that each object in the passed list must be of the Vehicle type, regardless of it is from Vehicle parent's class itself or from child class (Car, Truck).
 										</li>
 									</ul>
+
+									<h5>Interface Segregation Principle (ISP):</h5>
+									<ul>
+										<li><code>Clients should not be forced to depend upon interfaces that they do not use</code></li>
+										<li>Interface is a class-like structure that lists what methods needs to be implemented by a class that makes usage of this interface.
+												Like I said, it only indicates the methods, interface doesn't define their implementation - this is job for the class. </li>
+										<li>In Python, there is no interface as such. However, Python allows to implement abstract class with usage of abc module.
+											<br>
+											- we cannot instantiate an abstract class,<br>
+											- abstract class defines methods that needs to be implemented in all of the child classes that inherits from it,<br>
+											- with using abract classes we can be creating Python's interface-like structures.
+										</li>
+										<li>Lets set up scenario where there is a big interace that has multiple abstract methods:
+											<br>
+											- class that uses that interface needs to implement all of the abstract methods (in Python, it is required by decorator @abstractmethod),<br>
+											- however, there may be some abstract methods that our specific class doesn't need to implement,<br>
+											- implementing needless method or implementing it as <code>pass</code> violates SOLID principles,<br>
+											- following ISP, we would need to divide one main interface to several ones due to their functionality so that classes tha would use them can implement only methods that they need.
+										</li>
+									</ul>
+
+									<h5>Dependency Inversion Principle (DIP)</h5>
+									<ul>
+										<li><code>High-level modules should not depend upon low-level modules.</code><br>
+												<code>Both low and high level classes should depend on the same abstractions.</code><br>
+												<code>Abstractions should not depend on details.</code><br>
+												<code>Details should depend upon abstractions.</code><br>
+										</li>
+										<li>There are some characteristic terms for a bad code design:
+											<br>
+											- <b>Rigidity:</b> when it's hard to do some changes to the code as they affect to many parts of the application. When change necessary, it forces us to modify another dependent part of the code. Furthermore, it causes hardships with time and costs estimation for changes implementation,<br>
+											- <b>Fragility:</b> when changes being implemented causes crash of app's parts that we did not expect. It lowers trust in the project that uses the code because each another change can cause avalanche of errors from unknown sides,<br>
+											- <b>Immobility:</b> when it's impossible to use the code in another application as it's very difficult to extract it. Difficulties result from too big dependecny of code section against other ones. It happens that finding dependecies and extracting the code for reusing is more time consuming than writing it from scratch.
+										</li>
+										<li>Abstractions need to be organized is such way they don't depend on details (concrete implementations) but rather other way around - the implementations should depend on abstractions.</li>
+										<li>The main assumption over here is that implementations changes more often than the abstraction they were created on.</li>
+										<li>Low-level modules are sub-modules of a high-level module which in turn can be the low-level module for another module.</li>
+										<li>Lets take two classes A and B as the example:
+											<br>
+											- A depends on B, when B changes, it crashes the code,<br>
+											- we need to invert the dependencies and make B to adopt to A,<br>
+											- this can be achieved by implementing interface (abstract class A) and forcing code to depend on defined interface instead of a specific implementation (class B),<br>
+											- while we expect implementations to change frequently, the abstraction stays unchanged.
+										</li>
+									</ul>
+
 								</div>
 							</section>
 
