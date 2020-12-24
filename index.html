@@ -246,17 +246,22 @@ def main():
 										<ul>
 											<li>Useful in situation when we have a basic model and based on that model we want to create multiple modifications of that model, e.g.:
 												<br>
-												- a plain house is a besic model, however a house with swimming pool and 3 floors is a modification of the basic model.
+												- a plain house is a basic model, however a house with swimming pool and 3 floors is a modification of the basic model of house.
 											</li>
-											<li>Typical apporach withoud Builder would be creating base class and then creating a set of subclasses that extend base class.
-													Each subclass would bring some extenstion to fuilfil its own specialized requirement.
-													The danger of this approch is ending up a big amount of subclasses and each additional parameter that comes in grows that hierarchy even more.
+											<li>Typical apporach withoud Builder would be creating base class and then creating a set of subclasses that extend the base class.
+													Each subclass would bring some extenstions to fulfil its own specialized requirement.
+													The danger of this approch is ending up with a big amount of subclasses and each additional requirement that comes in grows that hierarchy even more.
 											</li>
-											<li>Builder makes creating complex objects with many fields and relations much easier.</li>
-											<li>It organizes the code into series of steps that are executed one by one when building an object.
+											<li>Builder makes creating complex objects from a baisc object much easier.</li>
+											<li>Builder organizes the code into series of steps that are executed one by one when building an object.
 													Importantly, we do not have to call all of the steps.
 													We have to call only that steps that are necessary for a specific model of house from example above.
 											</li>
+											<li>In short, Builder provides an implementation for steps for building an object.
+												 We can have multiple builders for building different kind of objects.
+												 As to our house example, houses can have different walls: wooden or concrete.
+												 
+											 </li>
 										</ul>
 
 										<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>Behavioral Desing Patterns</b></p>
