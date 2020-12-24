@@ -190,11 +190,11 @@ def main():
 											<li>Abstractions need to be organized is such way they don't depend on details (concrete implementations) but rather other way around - the implementations should depend on abstractions.</li>
 											<li>The main assumption over here is that implementations changes more often than the abstraction they were created on.</li>
 											<li>Low-level modules are sub-modules of a high-level module which in turn can be the low-level module for another module.</li>
-											<li>Lets take two modules A and B as the example:
+											<li>Lets take two classes A and B as the example:
 												<br>
-												- when A depends on B, when B changes, it crashes the code,<br>
+												- A depends on B, when B changes, it crashes the code,<br>
 												- we need to invert the dependencies and make B to adopt to A,<br>
-												- this can be achieved by implementing interface (abstract class) and forcing code to depend on defined interface instead of a specific implementation,<br>
+												- this can be achieved by implementing interface (abstract class A) and forcing code to depend on defined interface instead of a specific implementation (class B),<br>
 												- while we expect implementations to change frequently, the abstraction stays unchanged.
 											</li>
 										</ul>
