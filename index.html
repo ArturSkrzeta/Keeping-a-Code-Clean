@@ -49,155 +49,8 @@
 										<h2>Keeping Python Code Clean</h2>
 										<h3>Intro</h3>
 
-										<h3>SOLID</h3>
+										
 
-										<h5>Terminology:</h5>
-										<ul>
-											<li><b>Abstract class</b> is a class that contains one or more abstract methods. They cannot be instantiated and they require subclasses to provide implementations for their abstract methods.</li>
-											<li><b>Abstract method</b> is a method that is declared, but contains no implementation. Needs to be implemented by subclasses that inherits them.
-
-<!-- code area start -->
-<pre>
-from abc import ABC, abstractmethod
-
-class <span style="color:#00ffea">Save</span>(ABC):
-
-  @abstractmethod
-  def save_data(self):
-    print("Saving data...")
-
-class SaveToDb(<span style="color:#00ffea">Save</span>):
-
-  def save_data(self):
-    super().do_something()
-    print("to database.")
-
-x = SaveToDb()
-x.save_data()
-
--------------------------
-# output:
-# Saving data...
-# to database.</pre>
-<!-- code area stop -->
-
-												- <b>Save</b> abstract class defines abstract method <b>save_data</b>,<br>
-												- <b>SaveToDb</b> class implements <b>save_data</b> method and extends it with additional functionality.
-											</li>
-											<li><b>Inheritance</b> - child class inherits all of the attributes and methods of parent class.
-													However, everything that is inherited by child class can be extended in order to fit requirements that child class has to fulfil.
-													In such case there in a need to re-implement the method in the child class which is called the <b>method overriding</b>.
-												 	In the above code section, the child class SaveToDb inherits from the parent class Save.</li>
-											<li><b>Polymorphism</b> - naming methods the same in child class means that the same function can be used by different types/classes that inheritns from a base class .</li>
-										</ul>
-
-										<h5>Single Responsibility Principle (SRP):</h5>
-										<ul>
-											<li><code>Every class should only have one responsibility</code><br>
-													<code>and therefore only one reason to change.</code></li>
-											<li>In other words, a class is responsible for performing only one specified task.</li>
-											<li>Too many tasks within a class would cause to much complexity and change of one task can affect another task's work.</li>
-											<li>When multiple tasks in a class and there is a new requirement from the business, it forces us to modify existing code which violates rest of SOLID principles.</li>
-											<li>With this SRP, maintaining the code is much easier and readable when handing code over.</li>
-											<li>When class perfoms only one task, it is much easiser to test it out.</li>
-											<li>SRP enables flexibility in extending the application with new business requirements.</li>
-										</ul>
-
-										<h5>Open Closed Principle (OCP):</h5>
-										<ul>
-											<li><code>Software Entities (classes, functions, modules)</code><br>
-													<code>should be open for extension but closed to change.</code></li>
-											<li>Without OCP, when a new business requirement comes in, the most common approach is modifing the definition of existing method.</li>
-											<li>Keeping modifying definition of extisting functunality we end up testing the enire scope repeatedly.</li>
-											<li>When following OCP, instead of modifying, we should extend the aplication to satisfy the new requirement.</li>
-											<li>Avoiding modifying, we are less likely to introduce some bugs into the existing code as well as we avoinding redeploying the same code again and again.</li>
-											<li>Extension can be achieved by inheritance from parent class where child class satisfies a new requirement.
-												<br>
-												- child class extends existing parent classes,<br>
-												- child class can override definition of parent's methods which covers a new requirements.
-											</li>
-											<li>We can be keeping an abstract class - the most general one that will never be instantiated but will be a pattern to inherit from by sub-classes where each sub-class answers specific business requirement.</li>
-										</ul>
-
-										<h5>Liskov's Substitution Principle (LSP):</h5>
-										<ul>
-											<li><code>If S is a subtype of T, then objects of type T</code><br>
-													<code>may be replaced with objects of Type S.</code></li>
-											<li>This principle is strictly related to proper inheritnace where any child class can replace its parent class without breaking functionality.
-<!-- code area start -->
-<pre>
-class <span style="color:#00ffea">Vehicle</span>:
-  def count_wheels(self):
-    pass
-
-class Car(<span style="color:#00ffea">Vehicle</span>):
-  def count_wheels(self):
-    pass
-
-class Truck(<span style="color:#00ffea">Vehicle</span>):
-  def count_wheels(self):
-    pass
-
-def vehicle_wheels_count(<span style="color:#ffe200">vehicles</span>):
-  for viehicle in <span style="color:#ffe200">vehicles</span>:
-    print(viehicle.count_wheels())
-
-def main():
-	<span style="color:#ffe200">vehicles</span> = [Car(), Car(), Truck()]
-	vehicle_wheels_count(<span style="color:#ffe200">vehicles</span>)</pre>
-<!-- code area stop -->
-													- <b>Vehicle</b> class defines count_wheels method,<br>
-													- every child class that inherits from Vehicle parent class implements <b>count_wheels</b> method,<br>
-													- count_wheels method can be extended due to subclass's specification as car's wheels will be counted differently than truck's wheels,<br>
-													- the method <b>vehicle_wheels_count</b> doesn't care about type of passed object, it just calls count_wheels method on every object of the passed list,<br>
-													- all the method vehicle_wheels_count knows is that each object in the passed list must be of the Vehicle type, regardless of it is from Vehicle parent's class itself or from child class (Car, Truck).
-											</li>
-										</ul>
-
-										<h5>Interface Segregation Principle (ISP):</h5>
-										<ul>
-											<li><code>Clients should not be forced to depend upon interfaces that they do not use</code></li>
-											<li>Interface is a class-like structure that lists what methods needs to be implemented by a class that makes usage of this interface.
-													Like I said, it only indicates the methods, interface doesn't define their implementation - this is job for the class. </li>
-											<li>In Python, there is no interface as such. However, Python allows to implement abstract class with usage of abc module.
-												<br>
-												- we cannot instantiate an abstract class,<br>
-												- abstract class defines methods that needs to be implemented in all of the child classes that inherits from it,<br>
-												- with using abract classes we can be creating Python's interface-like structures.
-											</li>
-											<li>Lets set up scenario where there is a big interace that has multiple abstract methods:
-												<br>
-												- class that uses that interface needs to implement all of the abstract methods (in Python, it is required by decorator @abstractmethod),<br>
-												- however, there may be some abstract methods that our specific class doesn't need to implement,<br>
-												- implementing needless method or implementing it as <code>pass</code> violates SOLID principles,<br>
-												- following ISP, we would need to divide one main interface to several ones due to their functionality so that classes tha would use them can implement only methods that they need.
-											</li>
-										</ul>
-
-										<h5>Dependency Inversion Principle (DIP)</h5>
-										<ul>
-											<li><code>High-level modules should not depend upon low-level modules.</code><br>
-													<code>Both low and high level classes should depend on the same abstractions.</code><br>
-													<code>Abstractions should not depend on details.</code><br>
-													<code>Details should depend upon abstractions.</code><br>
-											</li>
-											<li>There are some characteristic terms for a bad code design:
-												<br>
-												- <b>Rigidity:</b> when it's hard to do some changes to the code as they affect to many parts of the application. When change necessary, it forces us to modify another dependent part of the code. Furthermore, it causes hardships with time and costs estimation for changes implementation,<br>
-												- <b>Fragility:</b> when changes being implemented causes crash of app's parts that we did not expect. It lowers trust in the project that uses the code because each another change can cause avalanche of errors from unknown sides,<br>
-												- <b>Immobility:</b> when it's impossible to use the code in another application as it's very difficult to extract it. Difficulties result from too big dependecny of code section against other ones. It happens that finding dependecies and extracting the code for reusing is more time consuming than writing it from scratch.
-											</li>
-											<li>Abstractions need to be organized is such way they don't depend on details (concrete implementations) but rather other way around - the implementations should depend on abstractions.</li>
-											<li>The main assumption over here is that implementations changes more often than the abstraction they were created on.</li>
-											<li>Low-level modules are sub-modules of a high-level module which in turn can be the low-level module for another module.</li>
-											<li>Lets take two classes A and B as the example:
-												<br>
-												- A depends on B, when B changes, it crashes the code,<br>
-												- we need to invert the dependencies and make B to adopt to A,<br>
-												- this can be achieved by implementing interface (abstract class A) and forcing code to depend on defined interface instead of a specific implementation (class B),<br>
-												- while we expect implementations to change frequently, the abstraction stays unchanged.
-											</li>
-										</ul>
 
 									</header>
 								</div>
@@ -211,7 +64,7 @@ def main():
 									<ul class="feature-icons">
 										<li class="icon solid fa-check">SOLID</li>
 										<li class="icon solid fa-check">DRY</li>
-										<li class="icon solid fa-check">KISS</li>
+										<li class="icon solid fa-check">KIS</li>
 									</ul>
 								</div>
 							</section>
@@ -221,9 +74,154 @@ def main():
 								<div class="container">
 									<h3>Demo</h3>
 
-									<h5>...:</h5>
+									<h3>SOLID</h3>
+
+									<h5>Terminology:</h5>
 									<ul>
-										<li>...</li>
+										<li><b>Abstract class</b> is a class that contains one or more abstract methods. They cannot be instantiated and they require subclasses to provide implementations for their abstract methods.</li>
+										<li><b>Abstract method</b> is a method that is declared, but contains no implementation. Needs to be implemented by subclasses that inherits them.
+
+<!-- code area start -->
+<pre>
+from abc import ABC, abstractmethod
+
+class <span style="color:#00ffea">Save</span>(ABC):
+
+@abstractmethod
+def save_data(self):
+	print("Saving data...")
+
+class SaveToDb(<span style="color:#00ffea">Save</span>):
+
+def save_data(self):
+	super().do_something()
+	print("to database.")
+
+x = SaveToDb()
+x.save_data()
+
+-------------------------
+# output:
+# Saving data...
+# to database.</pre>
+<!-- code area stop -->
+
+											- <b>Save</b> abstract class defines abstract method <b>save_data</b>,<br>
+											- <b>SaveToDb</b> class implements <b>save_data</b> method and extends it with additional functionality.
+										</li>
+										<li><b>Inheritance</b> - child class inherits all of the attributes and methods of parent class.
+												However, everything that is inherited by child class can be extended in order to fit requirements that child class has to fulfil.
+												In such case there in a need to re-implement the method in the child class which is called the <b>method overriding</b>.
+												In the above code section, the child class SaveToDb inherits from the parent class Save.</li>
+										<li><b>Polymorphism</b> - naming methods the same in child class means that the same function can be used by different types/classes that inheritns from a base class .</li>
+									</ul>
+
+									<h5>Single Responsibility Principle (SRP):</h5>
+									<ul>
+										<li><code>Every class should only have one responsibility</code><br>
+												<code>and therefore only one reason to change.</code></li>
+										<li>In other words, a class is responsible for performing only one specified task.</li>
+										<li>Too many tasks within a class would cause to much complexity and change of one task can affect another task's work.</li>
+										<li>When multiple tasks in a class and there is a new requirement from the business, it forces us to modify existing code which violates rest of SOLID principles.</li>
+										<li>With this SRP, maintaining the code is much easier and readable when handing code over.</li>
+										<li>When class perfoms only one task, it is much easiser to test it out.</li>
+										<li>SRP enables flexibility in extending the application with new business requirements.</li>
+									</ul>
+
+									<h5>Open Closed Principle (OCP):</h5>
+									<ul>
+										<li><code>Software Entities (classes, functions, modules)</code><br>
+												<code>should be open for extension but closed to change.</code></li>
+										<li>Without OCP, when a new business requirement comes in, the most common approach is modifing the definition of existing method.</li>
+										<li>Keeping modifying definition of extisting functunality we end up testing the enire scope repeatedly.</li>
+										<li>When following OCP, instead of modifying, we should extend the aplication to satisfy the new requirement.</li>
+										<li>Avoiding modifying, we are less likely to introduce some bugs into the existing code as well as we avoinding redeploying the same code again and again.</li>
+										<li>Extension can be achieved by inheritance from parent class where child class satisfies a new requirement.
+											<br>
+											- child class extends existing parent classes,<br>
+											- child class can override definition of parent's methods which covers a new requirements.
+										</li>
+										<li>We can be keeping an abstract class - the most general one that will never be instantiated but will be a pattern to inherit from by sub-classes where each sub-class answers specific business requirement.</li>
+									</ul>
+
+									<h5>Liskov's Substitution Principle (LSP):</h5>
+									<ul>
+										<li><code>If S is a subtype of T, then objects of type T</code><br>
+												<code>may be replaced with objects of Type S.</code></li>
+										<li>This principle is strictly related to proper inheritnace where any child class can replace its parent class without breaking functionality.
+<!-- code area start -->
+<pre>
+class <span style="color:#00ffea">Vehicle</span>:
+def count_wheels(self):
+	pass
+
+class Car(<span style="color:#00ffea">Vehicle</span>):
+def count_wheels(self):
+	pass
+
+class Truck(<span style="color:#00ffea">Vehicle</span>):
+def count_wheels(self):
+	pass
+
+def vehicle_wheels_count(<span style="color:#ffe200">vehicles</span>):
+for viehicle in <span style="color:#ffe200">vehicles</span>:
+	print(viehicle.count_wheels())
+
+def main():
+<span style="color:#ffe200">vehicles</span> = [Car(), Car(), Truck()]
+vehicle_wheels_count(<span style="color:#ffe200">vehicles</span>)</pre>
+<!-- code area stop -->
+												- <b>Vehicle</b> class defines count_wheels method,<br>
+												- every child class that inherits from Vehicle parent class implements <b>count_wheels</b> method,<br>
+												- count_wheels method can be extended due to subclass's specification as car's wheels will be counted differently than truck's wheels,<br>
+												- the method <b>vehicle_wheels_count</b> doesn't care about type of passed object, it just calls count_wheels method on every object of the passed list,<br>
+												- all the method vehicle_wheels_count knows is that each object in the passed list must be of the Vehicle type, regardless of it is from Vehicle parent's class itself or from child class (Car, Truck).
+										</li>
+									</ul>
+
+									<h5>Interface Segregation Principle (ISP):</h5>
+									<ul>
+										<li><code>Clients should not be forced to depend upon interfaces that they do not use</code></li>
+										<li>Interface is a class-like structure that lists what methods needs to be implemented by a class that makes usage of this interface.
+												Like I said, it only indicates the methods, interface doesn't define their implementation - this is job for the class. </li>
+										<li>In Python, there is no interface as such. However, Python allows to implement abstract class with usage of abc module.
+											<br>
+											- we cannot instantiate an abstract class,<br>
+											- abstract class defines methods that needs to be implemented in all of the child classes that inherits from it,<br>
+											- with using abract classes we can be creating Python's interface-like structures.
+										</li>
+										<li>Lets set up scenario where there is a big interace that has multiple abstract methods:
+											<br>
+											- class that uses that interface needs to implement all of the abstract methods (in Python, it is required by decorator @abstractmethod),<br>
+											- however, there may be some abstract methods that our specific class doesn't need to implement,<br>
+											- implementing needless method or implementing it as <code>pass</code> violates SOLID principles,<br>
+											- following ISP, we would need to divide one main interface to several ones due to their functionality so that classes tha would use them can implement only methods that they need.
+										</li>
+									</ul>
+
+									<h5>Dependency Inversion Principle (DIP)</h5>
+									<ul>
+										<li><code>High-level modules should not depend upon low-level modules.</code><br>
+												<code>Both low and high level classes should depend on the same abstractions.</code><br>
+												<code>Abstractions should not depend on details.</code><br>
+												<code>Details should depend upon abstractions.</code><br>
+										</li>
+										<li>There are some characteristic terms for a bad code design:
+											<br>
+											- <b>Rigidity:</b> when it's hard to do some changes to the code as they affect to many parts of the application. When change necessary, it forces us to modify another dependent part of the code. Furthermore, it causes hardships with time and costs estimation for changes implementation,<br>
+											- <b>Fragility:</b> when changes being implemented causes crash of app's parts that we did not expect. It lowers trust in the project that uses the code because each another change can cause avalanche of errors from unknown sides,<br>
+											- <b>Immobility:</b> when it's impossible to use the code in another application as it's very difficult to extract it. Difficulties result from too big dependecny of code section against other ones. It happens that finding dependecies and extracting the code for reusing is more time consuming than writing it from scratch.
+										</li>
+										<li>Abstractions need to be organized is such way they don't depend on details (concrete implementations) but rather other way around - the implementations should depend on abstractions.</li>
+										<li>The main assumption over here is that implementations changes more often than the abstraction they were created on.</li>
+										<li>Low-level modules are sub-modules of a high-level module which in turn can be the low-level module for another module.</li>
+										<li>Lets take two classes A and B as the example:
+											<br>
+											- A depends on B, when B changes, it crashes the code,<br>
+											- we need to invert the dependencies and make B to adopt to A,<br>
+											- this can be achieved by implementing interface (abstract class A) and forcing code to depend on defined interface instead of a specific implementation (class B),<br>
+											- while we expect implementations to change frequently, the abstraction stays unchanged.
+										</li>
 									</ul>
 
 								</div>
