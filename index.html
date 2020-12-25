@@ -241,7 +241,29 @@ vehicle_wheels_count(<span style="color:#ffe200">vehicles</span>)</pre>
 										<li>The simplest way to keep a code DRY is to delegate as much repetative functionalities as possible to an external reusable function.
 												And then whenever I need this functionality to implement, I simply call the function.</li>
 										<li>With that solution, whenever I need to update some functionality, I just do this once in the function that provides is instead of going to each place it's implemented.</li>
+										<li>Code example:
+<!-- code area start -->
+<pre>
+def <span style="color:#ffe200">save_to_db()</span> -> None:
+  db.commit()
+  db.save()
+  print("saved to db")
+
+def enter_data() -> None:
+  validate_data()
+  <span style="color:#ffe200">save_to_db()</span>
+
+def exit_app() -> None:
+  <span style="color:#ffe200">save_to_db()</span>
+  logout()
+</pre>
+<!-- code area stop -->
+											- Above method save_to_db is reused in another app's methods where is a need to save some data to database.<br>
+											- Hence, only method save_to_db contains all the logic an functionality of saving data to database.
+										</li>
 									</ul>
+
+									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>KIS</b></p>
 
 								</div>
 							</section>
