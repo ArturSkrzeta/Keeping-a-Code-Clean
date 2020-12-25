@@ -351,8 +351,26 @@ Your code has been rated at -7.14/10 (previous run: -5.71/10, -1.43)
 									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>Decorators</b></p>
 									<h5>Decorators</h5>
 									<ul>
-										<li>...</li>
-										<li>...</li>
+										<li>Decorators extend a function's functionality without modifying its code. Decorator is simply the function that brings additional functionality to a function that already exists.</li>
+										<li>Decorators can be custiomized by a programmer or can be provided by some library that we import to our code.</li>
+										<li>Code example:
+<!-- code area start -->
+<pre>
+def extend_user_rights(func):
+  def inner():
+    func()
+    print("You have got admin rights!")
+  return inner
+
+<span style="color:#00ffea">@ extend_user_rights</span>
+def ordinary_user():
+  print("Hello User!")
+
+if __name__ == "__main__":
+  ordinary_user()
+</pre>
+<!-- code area stop -->
+										</li>
 									</ul>
 
 								</div>
