@@ -60,9 +60,8 @@
 									<h3>Features</h3>
 									<p>App includes following features:</p>
 									<ul class="feature-icons">
-										<li class="icon solid fa-check">SOLID</li>
-										<li class="icon solid fa-check">DRY</li>
-										<li class="icon solid fa-check">KIS</li>
+										<li class="icon solid fa-check">Code snippets</li>
+										<li class="icon solid fa-check">Pylint</li>
 									</ul>
 								</div>
 							</section>
@@ -77,6 +76,8 @@
 										<li>SOLID</li>
 										<li>DRY</li>
 										<li>KIS</li>
+										<li>YANG</li>
+										<li>Pylint</li>
 									</ul>
 
 									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>SOLID</b></p>
@@ -264,6 +265,87 @@ def exit_app() -> None:
 									</ul>
 
 									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>KIS</b></p>
+
+									<h5>Keep It Simple</h5>
+									<ul>
+										<li>Princilple advises to keep simplicity as the highest priority and avoinding complexity when programming.</li>
+										<li>There is a saying, when you come back to the code and you don't know what is happening in there, then it doesn't follow KIS principle.</li>
+										<li>It's very important principle even though it sounds like a very general one.
+											However, keeping it simple makes us aware of code simplicity which we can treat as an inverstment that returns itself when maintaining the code.</li>
+										<li>KIS is even more important when handing over the code to someone else for maintaining it.</li>
+									</ul>
+
+									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>YAGNI</b></p>
+
+									<h5>You Aren't Going to need it.</h5>
+									<ul>
+										<li>New code being added, should do as exact things as requirements say at the moment.</li>
+										<li>Writing lines for the future because of any potential requirements that can come in is pretty senseless as we waste the time for futher maintenance of the code that is unused and waits for requirement that, perhaps, will never come.</li>
+										<li>Making an excessive predictions and writing as flexible code as possible is pretty idle as we cannot predict everything. The art here is just adjusting flexibility to the current situation.</li>
+									</ul>
+
+									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>Pylint</b></p>
+
+									<h5>Pylint library</h5>
+									<ul>
+										<li>Source code analysis tool which looks for syntax errors and gives refactoring suggestions.</li>
+										<li>All we need to do is:
+											<br>
+											<code>pip install pylint</code><br>
+											and then:<br>
+											<code>pylint main.py</code><br>
+											where main.py is the module whose code we want to examine for syntax errors
+										</li>
+										<li>Code example:
+<!-- code area start -->
+<pre>
+#
+# my app version 1.6
+# by Artur
+
+class animal:
+
+  def __init__(self,name) :
+    self.name = name
+
+def rename_animal(animal1, animal2):
+  animal1.name = 'Tom'
+
+animal1 = animal('Gerry')
+
+rename_animal(animal1, my_animal)
+</pre>
+<!-- code area stop -->
+										</li>
+										<li>Pylint feedback:
+<!-- code area start -->
+<pre style="background-color:#050569;">
+************* Module main_for_pylint
+main.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+main.py:5:0: C0103: Class name "animal" doesn't conform to PascalCase naming style (invalid-name)
+main.py:5:0: C0115: Missing class docstring (missing-class-docstring)
+main.py:5:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+main.py:10:0: C0116: Missing function or method docstring (missing-function-docstring)
+main.py:10:18: W0621: Redefining name 'animal1' from outer scope (line 13) (redefined-outer-name)
+main.py:10:27: W0613: Unused argument 'animal2' (unused-argument)
+main.py:15:23: E0602: Undefined variable 'my_animal' (undefined-variable)
+
+--------------------------------------------------------------------
+Your code has been rated at -7.14/10 (previous run: -5.71/10, -1.43)
+</pre>
+<!-- code area stop -->
+											- Pylint lists all of the refactroing suggestions.<br>
+											- It says that there is no such thing as introducing docstring that would describe the modeule,<br>
+											- It indicates that class name "animal" should be capitalized.<br>
+											- Once again there is no docstring describing the class.<br>
+											- It suggests the class hass too few or none of public methods.<br>
+											- Once again there is no docstring describing the function.<br>
+											- It screams that variable "animal1" in the local scope of the function is as the same as the variable in the global scope.<br>
+											- It indicates parameter "animal2" in the function "rename_animal" is not used.<br>
+											- It shows that variable "my_animal" has never been defined so it cannot be passed in the function.<br>
+											- On the bottom we can see the rate of the code and comparison how it looked like during last assessment.
+										</li>
+									</ul>
 
 								</div>
 							</section>
