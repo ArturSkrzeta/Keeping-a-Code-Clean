@@ -236,8 +236,11 @@ vehicle_wheels_count(<span style="color:#ffe200">vehicles</span>)</pre>
 									<h5>Don't Repeat Yourself</h5>
 									<ul>
 										<li>This is general language-independent principle that aims at reducing repititions in the source code.</li>
-										<li>The same code snippet repeated in different places of the code makes project hard to mantian and onee small change would force us to come and update each and every section change concerns.</li>
-										<li></li>
+										<li>The same code snippet repeated in different places of the code makes project hard to mantian.
+												Even one small change or a new business requirement would force us to come through and update every section that change concerns.</li>
+										<li>The simplest way to keep a code DRY is to delegate as much repetative functionalities as possible to an external reusable function.
+												And then whenever I need this functionality to implement, I simply call the function.</li>
+										<li>With that solution, whenever I need to update some functionality, I just do this once in the function that provides is instead of going to each place it's implemented.</li>
 									</ul>
 
 								</div>
