@@ -362,7 +362,7 @@ def extend_user_rights(func):
     print("You have got admin rights!")
   return inner
 
-<span style="color:#00ffea">@ extend_user_rights</span>
+<span style="color:#00ffea">@extend_user_rights</span>
 def ordinary_user():
   print("Hello User!")
 
@@ -370,6 +370,10 @@ if __name__ == "__main__":
   ordinary_user()
 </pre>
 <!-- code area stop -->
+											- Function <b>extend_user_rights</b> extends <b>ordinary_user</b> function and give additional functionalities.<br>
+											- What kind of functionalities decorator adds can be defined in decorator's body.<br>
+											- What is the best about decorators they can be reused many times for different regular functions that, besides their own tasks, give also admin rights.<br>
+											- Function <b>func</b> in decorator's body is replaced by any function we want to decorate.
 										</li>
 									</ul>
 
