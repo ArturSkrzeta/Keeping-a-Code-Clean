@@ -79,6 +79,7 @@
 										<li>YANG</li>
 										<li>Pylint</li>
 										<li>Decorators</li>
+										<li>Encapsulation</li>
 									</ul>
 
 									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>SOLID</b></p>
@@ -377,6 +378,52 @@ if __name__ == "__main__":
 											- Function <b>func</b> in decorator's body is replaced by any function we want to decorate.
 										</li>
 									</ul>
+
+									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>Encapsulation</b></p>
+
+									<h5>Encapsulation:</h5>
+									<ul>
+										<li>It refers to object-oriented programming where we want to bind data with specific section of code.</li>
+										<li>We can think of it as if a shield that prevents data (variable) from being accessed and thus manipulated by the code outside the shield.</li>
+										<li>In practice, we hide a class variable from any other class. The variable can be accessed only through a member function of the class that owns that variable. By hiding a variable we make it private to a class that delcares it.</li>
+										<li>Some benefits:
+											<br>
+											- User of the app doesn't have any idea of inner implementation of a particualr class. He sees only what we allow him to see which is basically passing the value to a method that initializes variable with passed value. Method that initializes variable can add some logic and validation to restric values to a specific let's say range.<br>
+											- We can make a class variable as read-only or write-only as per our requirements.<br>
+											- It ensures reusability and makes easier to change it with some new requirements.
+										</li>
+										<li>Code example:
+<!-- code area start -->
+<pre>
+class Shop():
+
+  def __init__(self):
+    self.category = "Adventure"
+    self.__item = "Book"
+
+  def Product(self):
+    return self.category + ": " + self.__item
+
+  def set__item(self, name):
+    self.__item = name
+
+  def get__item(self):
+    return self.name
+
+sh = Shop()
+sh.set__item("Video")
+print(sh.Product())
+
+-----------------
+# output
+# Adventure: Video
+</pre>
+<!-- code area stop -->
+											- to make a variable private we need to put double scores before its name like: <code>__variable_name</code>.<br>
+											- to access the private variable we need to apply getter and setter which are member methods with access to the private variable.<br>
+										</li>
+									</ul>
+
 
 								</div>
 							</section>
