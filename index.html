@@ -469,15 +469,23 @@ def get_detailed_info(elements: <span style="color:#00ffea">List(Element)</span>
 											- In fact, Python ignores types adnotations, however, in cooporation with IDE as PyCharm it highlights where declared type differs from passed type.<br>
 											- Besides PyCharm's help, there is a library called <b>mypy</b> that reads the code and lists all type's conflicts. We just need to install it: <code>pip install mypy</code> and use it: <code>mypy main.py</code>.
 										</li>
-										<li>Let's compare static typing with dynamic taping:
+										<li>Let's languages set
 											<br><br>
 											<img src="images/dynamic_vs_static.png" width="620"><span style="font-size:12px">source: itnext.io</span>
 											<br><br>
 											- As projet gets bigger, the productivity of maintaining it in dynamically tiping decreases and costs increase.
 											We will eventually hit a point where there is just too much to try (type) and catch (error) as it is in dynamic language.<br>
 											- In addition, with no types addnotations code refactoring may become a big challange when you or someone else comes back to an old code because you have no idea what is the data structure of each variable.<br>
-											- Let's see some comparison:
-
+										</li>
+										<li>Before overall comparizon let's understand following terms:
+											- <b>Source code</b>: original code (usually typed by a human into a computer).<br>
+											- <b>Translating</b>: converting source code into machine code.<br>
+											- <b>Run-time</b>: period when program is executing commands (after compilation, if compiled.)<br>
+											- <b>Complied</b>: code translated before run-time.<br>
+											- <b>Interpreted</b>: code translated on the fly, during execution.<br>
+										</li>
+										<li>Let's see the actual comparison:
+											<br><br>
 											<table>
 												<thead>
 													<tr>
@@ -508,35 +516,33 @@ def get_detailed_info(elements: <span style="color:#00ffea">List(Element)</span>
 													</tr>
 												</tbody>
 											</table>
+											<br><br>
 
+											- However, we need to distinguish Compiled and Interpreted:<br><br>
 
 											<table>
 												<thead>
 													<tr>
-														<th>Static typing</th>
-														<th>Dynamic typing</th>
+														<th>Compiled</th>
+														<th>Interpreted</th>
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
-														<td>Usually compiled by compiler. Code translated into binary code before run-time.</td>
-														<td>Interpreted by interpreter. Code translated on the fly, during execution.</td>
+														<td>Fast to develop (edit and run)</td>
+														<td>Slow to develop (edit, compile, link and run)</td>
 													</tr>
 													<tr>
-														<td>Runs faster because of not needing to check types dynamically while executing.</td>
-														<td></td>
+														<td>Code translated into binary code before run-time.</td>
+														<td>Code being translated on the fly, during execution.</td>
 													</tr>
 													<tr>
-														<td>At first there is a delay before running for translation and type-checking</td>
-														<td></td>
+														<td>Slow to execute because each statement had to be interpreted into machine code every time it was executed</td>
+														<td>Fast to execute. The whole program is already in native machine code</td>
 													</tr>
 													<tr>
-														<td>Prevents variables from changing types</td>
-														<td>Allows variables to changing types further in the code.</td>
-													</tr>
-													<tr>
-														<td>Catches errors early.</td>
-														<td>Catches errors during execution.</td>
+														<td>More convenient for static languages.</td>
+														<td>More convenient for dynamic languages.</td>
 													</tr>
 												</tbody>
 											</table>
