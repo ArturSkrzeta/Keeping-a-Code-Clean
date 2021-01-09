@@ -427,9 +427,14 @@ print(sh.Product())
 
 									<p id="static_typing" style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>Static typing</b></p>
 
-									<h5>Static typing:</h5>
+									<h5>Static typing in dynamic Python:</h5>
 									<ul>
-										<li>Python itself is the dynamically typed pragramming language.
+										<li>At first, let's see overview on programming lanugages:
+											<br><br>
+											<img src="images/languages.png" width="600"><span style="font-size:12px">source: android.jlelse.eu</span>
+											<br>
+										</li>
+										<li>As we can see, Python itself is the a strong-dynamically typed pragramming language.
 												It means we don't have to declare type of variable before initializing it with a vlaue.
 												Dynamic Python follows duck typing:<br>
 												<b><i>If it walks like a duck and it quacks like a duck, then it must be a duck.</i></b>
@@ -471,18 +476,67 @@ def get_detailed_info(elements: <span style="color:#00ffea">List(Element)</span>
 											- As projet gets bigger, the productivity of maintaining it in dynamically tiping decreases and costs increase.
 											We will eventually hit a point where there is just too much to try (type) and catch (error) as it is in dynamic language.<br>
 											- In addition, with no types addnotations code refactoring may become a big challange when you or someone else comes back to an old code because you have no idea what is the data structure of each variable.<br>
-											- Let's summarize the comparison:
+											- Let's see some comparison:
+
 											<table>
 												<thead>
 													<tr>
 														<th>Static typing</th>
-														<td>Dynamic typing</td>
+														<th>Dynamic typing</th>
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
-														<td>...</td>
-														<td>...</td>
+														<td>Types checked before run-time.</td>
+														<td>Types checked on the fly, during execution.</td>
+													</tr>
+													<tr>
+														<td>Runs faster because of not needing to check types while executing.</td>
+														<td>Runs slower because of dynamic type checking.</td>
+													</tr>
+													<tr>
+														<td>At first there is a delay before running for type-checking.</td>
+														<td>No delays as there is no preceding type-checking.</td>
+													</tr>
+													<tr>
+														<td>Prevents variables from changing types</td>
+														<td>Allows variables to change types further in the code.</td>
+													</tr>
+													<tr>
+														<td>Catches errors early.</td>
+														<td>Catches errors during execution.</td>
+													</tr>
+												</tbody>
+											</table>
+
+
+											<table>
+												<thead>
+													<tr>
+														<th>Static typing</th>
+														<th>Dynamic typing</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>Usually compiled by compiler. Code translated into binary code before run-time.</td>
+														<td>Interpreted by interpreter. Code translated on the fly, during execution.</td>
+													</tr>
+													<tr>
+														<td>Runs faster because of not needing to check types dynamically while executing.</td>
+														<td></td>
+													</tr>
+													<tr>
+														<td>At first there is a delay before running for translation and type-checking</td>
+														<td></td>
+													</tr>
+													<tr>
+														<td>Prevents variables from changing types</td>
+														<td>Allows variables to changing types further in the code.</td>
+													</tr>
+													<tr>
+														<td>Catches errors early.</td>
+														<td>Catches errors during execution.</td>
 													</tr>
 												</tbody>
 											</table>
