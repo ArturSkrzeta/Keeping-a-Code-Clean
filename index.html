@@ -429,9 +429,49 @@ print(sh.Product())
 
 									<h5>Static typing:</h5>
 									<ul>
-										<li></li>
+										<li>Python itself is the dynamically typed pragramming language.
+												It means we don't have to declare type of variable before initializing it with a vlaue.
+												Dynamic Python follows duck typing:<br>
+												<b><i>If it walks like a duck and it quacks like a duck, then it must be a duck.</i></b>
+										<li>In other words, we don't have to call it a duck (defining its type) when it has duck's properties and methods.</li>
+										<li>When Python faces na object, assumes object's type based on properties or methods this type has declared within.
+												In case when a specific property doesn't exist and Python tryies to call it on the object then exception (error) appears.
+												However, it apperas during running the code as opposed to statically typed programming languages where compiler checks entire code before actual running.</li>
+										<li>Below code are going to be executed as long as list elements contains object of a type with <code>details</code> attriubute.
+												When loop encouters an object of a type where there is no attribute <code>details</code> declared then it throws an error.
+												Thus, it can make 100 iterations but 101 iteration can cause an error.
+<!-- code area start -->
+<pre>
+def get_detailed_info(elements):
+  for element in elements:
+    print(element.details)
+</pre>
+<!-- code area stop -->
+										</li>
+										<li>Due to dynamic Python's nature, types declaration is optional however it increses code readibility and code's correctness control.
+<!-- code area start -->
+<pre>
+from typing import List
+from element import Element
+
+def get_detailed_info(elements: <span style="color:#00ffea">List(Element)</span>) -> <span style="color:#ffe200">None</span>:
+  for element in elements:
+    print(element.details)
+</pre>
+<!-- code area stop -->
+											- What we type statically in Python most often is types of passed arguments to functions and methods as well as returned types.<br>
+											- We type also variable that is unclear, for example it's a good practice to declare types of elements in a list: <code>self.grades: List(int) = []</code><br>
+											- In fact, Python ignores types adnotations, however, in cooporation with IDE as PyCharm it highlights where declared type differs from passed type.<br>
+											- Besides PyCharm's help, there is a library called <b>mypy</b> that reads the code and lists all type's conflicts. We just need to install it: <code>pip install mypy</code> and use it: <code>mypy main.py</code>.
+										</li>
 										<li>Let's compare static typing with dynamic taping:
-											<br>
+											<br><br>
+											<img src="images/dynamic_vs_static.png" width="620"><span style="font-size:12px">source: itnext.io</span>
+											<br><br>
+											- As projet gets bigger, the productivity of maintaining it in dynamically tiping decreases and costs increase.
+											We will eventually hit a point where there is just too much to try (type) and catch (error) as it is in dynamic language.<br>
+											- In addition, with no types addnotations code refactoring may become a big challange when you or someone else comes back to an old code because you have no idea what is the data structure of each variable.<br>
+											- Let's summarize the comparison:
 											<table>
 												<thead>
 													<tr>
