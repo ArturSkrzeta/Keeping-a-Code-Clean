@@ -73,16 +73,17 @@
 
 									<h5>In this section I describe following concepts:</h5>
 									<ul>
-										<li>SOLID</li>
-										<li>DRY</li>
-										<li>KIS</li>
-										<li>YANG</li>
-										<li>Pylint</li>
-										<li>Decorators</li>
-										<li>Encapsulation</li>
+										<a href="#solid"><li>SOLID</li></a>
+										<a href="#dry"><li>DRY</li></a>
+										<a href="#kis"><li>KIS</li></a>
+										<a href="#yagni"><li>YAGNI</li></a>
+										<a href="#pylint"><li>Pylint</li></a>
+										<a href="#decorators"><li>Decorators</li></a>
+										<a href="#encapsulation"><li>Encapsulation</li></a>
+										<a href="#static_typing"><li>Static typing</li></a>
 									</ul>
 
-									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>SOLID</b></p>
+									<p id="solid" style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>SOLID</b></p>
 
 									<p>SOLID is the set of good practicies that lead us to properly desing software keeping to the concept of the Object-orinted programming.</p>
 
@@ -234,7 +235,7 @@ vehicle_wheels_count(<span style="color:#ffe200">vehicles</span>)</pre>
 										</li>
 									</ul>
 
-									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>DRY</b></p>
+									<p id="dry" style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>DRY</b></p>
 
 									<h5>Don't Repeat Yourself</h5>
 									<ul>
@@ -266,7 +267,7 @@ def exit_app() -> None:
 										</li>
 									</ul>
 
-									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>KIS</b></p>
+									<p id="kis" style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>KIS</b></p>
 
 									<h5>Keep It Simple</h5>
 									<ul>
@@ -277,7 +278,7 @@ def exit_app() -> None:
 										<li>KIS is even more important when handing over the code to someone else for maintaining it.</li>
 									</ul>
 
-									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>YAGNI</b></p>
+									<p id="yagni" style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>YAGNI</b></p>
 
 									<h5>You Aren't Going to need it.</h5>
 									<ul>
@@ -286,7 +287,7 @@ def exit_app() -> None:
 										<li>Making an excessive predictions and writing as flexible code as possible is pretty idle as we cannot predict everything. The art here is just adjusting flexibility to the current situation.</li>
 									</ul>
 
-									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>Pylint</b></p>
+									<p id="pylint" style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>Pylint</b></p>
 
 									<h5>Pylint library</h5>
 									<ul>
@@ -349,7 +350,7 @@ Your code has been rated at -7.14/10 (previous run: -5.71/10, -1.43)
 										</li>
 									</ul>
 
-									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>Decorators</b></p>
+									<p id="decorators" style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>Decorators</b></p>
 									<h5>Decorators</h5>
 									<ul>
 										<li>Decorators extend a function's functionality without modifying its code. Decorator is simply the function that brings additional functionality to a function that already exists.</li>
@@ -379,7 +380,7 @@ if __name__ == "__main__":
 										</li>
 									</ul>
 
-									<p style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>Encapsulation</b></p>
+									<p id="encapsulation" style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>Encapsulation</b></p>
 
 									<h5>Encapsulation:</h5>
 									<ul>
@@ -421,6 +422,31 @@ print(sh.Product())
 <!-- code area stop -->
 											- to make a variable private we need to put double scores before its name like: <code>__variable_name</code>.<br>
 											- to access the private variable we need to apply getter and setter which are member methods with access to the private variable.<br>
+										</li>
+									</ul>
+
+									<p id="static_typing" style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>Static typing</b></p>
+
+									<h5>Static typing:</h5>
+									<ul>
+										<li></li>
+										<li>Let's compare static typing with dynamic taping:
+											<br>
+											<table>
+												<thead>
+													<tr>
+														<th>Static typing</th>
+														<td>Dynamic typing</td>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>...</td>
+														<td>...</td>
+													</tr>
+												</tbody>
+											</table>
+
 										</li>
 									</ul>
 
