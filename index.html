@@ -91,22 +91,21 @@
 									<ul>
 										<li><b>Abstract class</b> is a class that contains one or more abstract methods. They cannot be instantiated and they require subclasses to provide implementations for their abstract methods.</li>
 										<li><b>Abstract method</b> is a method that is declared, but contains no implementation. Needs to be implemented by subclasses that inherits them.
-
 <!-- code area start -->
 <pre>
 from abc import ABC, abstractmethod
 
 class <span style="color:#00ffea">Save</span>(ABC):
 
-@abstractmethod
-def save_data(self):
-	print("Saving data...")
+  @abstractmethod
+  def save_data(self):
+    print("Saving data...")
 
 class SaveToDb(<span style="color:#00ffea">Save</span>):
 
-def save_data(self):
-	super().do_something()
-	print("to database.")
+  def save_data(self):
+    super().do_something()
+    print("to database.")
 
 x = SaveToDb()
 x.save_data()
@@ -116,7 +115,6 @@ x.save_data()
 # Saving data...
 # to database.</pre>
 <!-- code area stop -->
-
 											- <b>Save</b> abstract class defines abstract method <b>save_data</b>,<br>
 											- <b>SaveToDb</b> class implements <b>save_data</b> method and extends it with additional functionality.
 										</li>
