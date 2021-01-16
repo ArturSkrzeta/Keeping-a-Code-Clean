@@ -394,27 +394,28 @@ if __name__ == "__main__":
 										<li>Code example:
 <!-- code area start -->
 <pre>
-class Shop():
+class <span style="color:#ff6fcb;">Shop()</span>:
 
   def __init__(self):
     self.category = "Adventure"
-    self.__item = "Book"
+    self.__item = ""
 
-  def Product(self):
+  def <span style="color:#00ffea;">product(</span>self<span style="color:#00ffea;">)</span>:
     return self.category + ": " + self.__item
 
-  def set__item(self, name):
+  def <span style="color:#00ffea;">set__item(</span>self, name<span style="color:#00ffea;">)</span>:
     self.__item = name
 
-  def get__item(self):
-    return self.name
+  def <span style="color:#00ffea;">get__item(</span>self<span style="color:#00ffea;">)</span>:
+    return self.__item
 
-sh = Shop()
-sh.set__item("Video")
-print(sh.Product())
+sh = <span style="color:#ff6fcb;">Shop()</span>
+sh.<span style="color:#00ffea;">set__item(</span>"Video"<span style="color:#00ffea;">)</span>
 
------------------
-# output
+sh.<span style="color:#00ffea;">get__item()</span>
+# Video
+
+sh.<span style="color:#00ffea;">product()</span>
 # Adventure: Video
 </pre>
 <!-- code area stop -->
