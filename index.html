@@ -603,6 +603,42 @@ def <span style="color:#00ffea;">add(</span>x, y<span style="color:#00ffea;">)</
 											- At first, we need to go with <code>pip install multipledispatch</code>.<br>
 											- Decorator <b>dispatch</b> states what kind of object decorated function can accept.
 										 </li>
+										 <li>Operator overloading:
+ <!-- start -->
+ <pre>
+class <span style="color:#00ffea;">Point</span>:
+
+   def __init__(self, x, y):
+       self.x = x
+       self.y = y
+
+   def __add__(self, other):
+
+       if isinstance(other, <span style="color:#00ffea;">Point</span>):
+           x = self.x + other.x
+           y = self.y + other.y
+       else:
+           x = self.x + other
+           y = self.y + other
+
+       return <span style="color:#00ffea;">Point(</span>x,y<span style="color:#00ffea;">)</span>
+
+a = <span style="color:#00ffea;">Point(</span>1,1<span style="color:#00ffea;">)</span>
+b = <span style="color:#00ffea;">Point(</span>3,4<span style="color:#00ffea;">)</span>
+
+c = a + b
+print(c.x, c.y)
+# 4, 5
+
+d = a + 5
+print(d.x, d.y)
+# 6, 6
+ </pre>
+ <!-- end -->
+ 											- We overload <code>+</code> operator by speical method <code>__add__</code>.<br>
+											- Inside <code>__add__</code> we check if second parameter is type of <b>Point</b>. If so then we sum x and y coordinates up together respectively. If other is object of integer then we add it to x and y coordinates.<br>
+											- By operator overloading we redefined the <code>+</code> operator. Otherwise the line <code>c = a + b</code> would raise an error.
+										 </li>
 									</ul>
 
 								</div>
