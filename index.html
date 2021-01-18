@@ -580,6 +580,29 @@ u.<span style="color:#ff6fcb;">welcome(</span>"Artur"<span style="color:#ff6fcb;
 											- As you can see above, function <code>u.welcome</code> can be called in two ways.<br>
 											- <code>name</code> parameter is set as optional.
 										</li>
+										<li>Using <b>multipledispatch</b> library:
+<!-- start -->
+<pre>
+from multipledispatch import dispatch
+
+<span style="color:#6fff75;">@dispatch(int, int)</span>
+def <span style="color:#00ffea;">add(</span>x, y<span style="color:#00ffea;">)</span>:
+  <span style="background-color:#ad5353;">return x + y</span>
+
+<span style="color:#6fff75;">@dispatch(object, object)</span>
+def <span style="color:#00ffea;">add(</span>x, y<span style="color:#00ffea;">)</span>:
+  <span style="background-color:#3976b3;">return f'{x} {y}'</span>
+
+<span style="color:#00ffea;">add(</span>2,2<span style="color:#00ffea;">)</span>
+# <span style="background-color:#ad5353;">4</span>
+
+<span style="color:#00ffea;">add(</span>'High',5<span style="color:#00ffea;">)</span>
+# <span style="background-color:#3976b3;">'High 5'</span>
+</pre>
+<!-- end -->
+											- At first, we need to go with <code>pip install multipledispatch</code>.<br>
+											- Decorator <b>dispatch</b> states what kind of object decorated function can accept.
+										 </li>
 									</ul>
 
 								</div>
