@@ -81,6 +81,7 @@
 										<a href="#decorators"><li>Decorators</li></a>
 										<a href="#encapsulation"><li>Encapsulation</li></a>
 										<a href="#static_typing"><li>Static typing</li></a>
+										<a href="#method_overloading"><li>Method overloading</li></a>
 									</ul>
 
 									<p id="solid" style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>SOLID</b></p>
@@ -549,6 +550,35 @@ def get_detailed_info(elements: <span style="color:#00ffea">List(Element)</span>
 										</li>
 									</ul>
 
+									<p id="method_overloading" style="font-size:22px; border-bottom: 1px solid #cacaca; padding-bottom:4px;"><b>Method overloading</b></p>
+
+									<ul>
+										<li>It is an ability of a function to behave in different way based on the parameters it receives.</li>
+										<li>Defining a function we can accept zero, one, or multiple parameters so that we can call that function with zero, one or many parameters.</li>
+										<li>It improves code reusablity as we can overload the function instead of writing a brend-new one that differs only slightly.
+												Thus, we can call one function in different ways, so this is what is called a method overloading.</li>
+										<li>Simpliest example:
+<!-- start -->
+<pre>
+class <span style="color:#00ffea;">User</span>:
+
+  def <span style="color:#ff6fcb;">welcome(</span>self, name=None<span style="color:#ff6fcb;">)</span>:
+    if name is not None:
+      <span style="background-color:#ad5353;">print(f'Hello {name}!')</span>
+    else:
+      <span style="background-color:#3976b3;">print('Hello there!')</span>
+
+u = <span style="color:#00ffea;">User()</span>
+
+u.<span style="color:#ff6fcb;">welcome()</span>
+# <span style="background-color:#3976b3;">Hello there!</span>
+
+u.<span style="color:#ff6fcb;">welcome(</span>"Artur"<span style="color:#ff6fcb;">)</span>
+# <span style="background-color:#ad5353;">Hello Artur!</span>
+</pre>
+<!-- end -->
+										</li>
+									</ul>
 
 								</div>
 							</section>
